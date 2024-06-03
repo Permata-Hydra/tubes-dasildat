@@ -17,7 +17,7 @@
 set_time_limit(300);
 
 function panggil_model(){
-    $perintah = "python C:\\Dasildat-Tes\\script-PHP\\heart_failure.py";
+    $perintah = "python C:\Dasildat-Tes\heart_failure.py";
     $output = shell_exec($perintah); 
     return $output; 
 }
