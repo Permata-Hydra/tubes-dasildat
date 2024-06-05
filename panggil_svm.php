@@ -1,14 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html leng="en">
 <head>
-    <title>Upload File</title> 
+    <title>Prediksi Dataset</title>
 </head>
 
 <body>
+    <h2>Model Support Vector Machine</h2>
     <form action="" method="post" enctype="multipart/form-data">
         Pilih file: <input type="file" name="berkas" />
-        <input type="submit" name="upload" value="upload" />
-    </form> 
+        <input type="submit" name="upload" value="upload" /><br><br>
+    </form>
+    
+    <p>Ingin coba model lain?</p>
+    <div style="display: flex; gap: 10px;">
+        <form action="panggil_knn.php" method="GET">
+            <button type="submit">k-NN</button>
+        </form>
+
+        <form action="panggil_randomforest.php" method="GET">
+            <button type="submit">RandomForest</button>
+        </form>
+    </div>
 </body> 
 </html>
 
@@ -16,8 +28,8 @@
 
 set_time_limit(300);
 
-function panggil_model(){
-    $perintah = "python C:\Dasildat-Tes\heart_failure.py";
+function panggil_svm(){
+    $perintah = "python C:\Dasildat-Tes\heart_failure_svm.py";
     $output = shell_exec($perintah); 
     return $output; 
 }
@@ -40,7 +52,7 @@ if(isset($_POST["upload"])) {
         echo "Link dataset: <a href='".$dirUpload.$namaFile."'>".$namaFile."</a><br/>";
 
         # Cetak hasil prediksi
-        $hasil = panggil_model();
+        $hasil = panggil_svm();
         echo 'Hasil: ' . nl2br($hasil);
                
 	    echo "Link hasil: <a href=hasil_heart.csv>hasil_heart.csv</a><br/>";
