@@ -2,7 +2,7 @@ import joblib
 import pandas as pd
 from sklearn import preprocessing
 from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import RandomizedSearchCV
 from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import classification_report
 from sklearn.ensemble import RandomForestClassifier
@@ -51,7 +51,7 @@ param_grid = [
      'min_samples_leaf':[1, 2, 4]}
  ]
 
-classifier = GridSearchCV(RandomForestClassifier(), param_grid, scoring='recall', cv=5, refit = True, verbose = 0)
+classifier = RandomizedSearchCV(RandomForestClassifier(), param_grid, scoring='recall', cv=5, refit = True, verbose = 0)
 classifier.fit(scaled_feature, label)
 
 # Cetak hasil prediksi
