@@ -4,7 +4,7 @@ from sklearn import preprocessing
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import GridSearchCV
 from sklearn.preprocessing import LabelEncoder
-from sklearn.metrics import classification_report
+from sklearn.metrics import classification_report, accuracy_score
 from sklearn.svm import SVC
 import os
 
@@ -56,6 +56,16 @@ classifier.fit(scaled_feature, label)
 predictions = classifier.predict(scaled_feature)
 report = classification_report(label, predictions, zero_division=1)
 
+# Simpan hasil akurasinya dalam variabel baru
+accuracy = accuracy_score(label, predictions)
+if accuracy >= 0.90:
+    conclusion = "Model ini memberikan hasil akurasi di atas 90%! Sangat baik."
+else:
+    conclusion = "Hasil akurasi yang dihasilkan sepertinya belum optimal karena di bawah 90%. Silahkan coba model lain!"
+print(conclusion)
+
+report += "\n" + conclusion
+
 # Simpan hasil prediksi ke file 
 hasil = pd.DataFrame(predictions)
 hasil_file_path = 'hasil_heart.csv'
@@ -63,5 +73,5 @@ hasil.to_csv(hasil_file_path, index=True)
 
 print("\nClassification Report:")
 print(report)
-print("Hasil Prediksi:")
+print("\nHasil Prediksi:")
 print(hasil)
